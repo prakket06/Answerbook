@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            height: 90vh;
+            margin-top: 1%;
+            margin-left: 10%;
+        }
+        #bar {
+            position: absolute;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 75%;
+            right: 0;
+            z-index: 0;
+            transform-origin: left;
+            transition: width 1s ease;
+        }
+        #Percentage {
+            position: absolute;
+            top: 0;
+            width: 75%;
+            height: 100%;
+            max-height: 100%;
+            align-content: center;
+            z-index: -1;
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+<body bgcolor="black">
+    <img src="loadingBackground.jpg" id="Percentage">
+    <div id="bar"></div>
+    <div id="percentText" style="position:absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); color: white; font-size: 2rem; z-index: 2;">0%</div>
+    <script>
+        const Percentage = document.getElementById("Percentage");
+        const percentText = document.getElementById("percentText");
+        const bar = document.getElementById("bar");
+
+        let startTime = Date.now();
+        let totalResources = 0;
+        let loadedResources = 0;
+        let failedResources = 0;
+
+        // Update the progress bar based on loaded and total resources
+        function displayResourceProgress(loadedResources, totalResources) {
+            if (totalResources > 0) {
+                const percentage = Math.round((loadedResources / totalResources) * 100);
+                const elapsedTime = Date.now() - startTime;
+                bar.style.width = (100 - percentage) + '%';
+                percentText.textContent = percentage + "%";
+                percentText.style.color = '#39ff14';
+                percentText.style.textShadow = '0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14, 0 0 40px #39ff14, 0 0 50px #39ff14, 0 0 60px #39ff14, 0 0 70px #39ff14';
+                if (loadedResources + failedResources === totalResources) {
+                    bar.style.width = '0%';
+                    percentText.textContent = "100%";
+                    setTimeout(() => {
+                        window.location.href = 'quesno.html';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Load the main page and track resource loading progress
+        async function loadMainPage() {
+            const mainPageUrl = 'quesno.html';
+            const resources = [
+                { url: 'https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Orbitron:wght@900&family=Reenie+Beanie&display=swap', type: 'css' },
+                { url: 'https://cdn.jsdelivr.net/npm/sweetalert2@11', type: 'js' },
+                { url: 'https://fonts.googleapis.com', type: 'css' },
+                { url: 'https://fonts.gstatic.com', type: 'css' },
+                { url: "https://fonts.gstatic.com/s/jainipurva/v1/CHynV-vdHVXwbWcUswbUGEoIFn8cjw.woff2", type: 'font' },
+                { url: "https://fonts.gstatic.com/s/jainipurva/v1/CHynV-vdHVXwbWcUswbUGEoJFn8.woff2", type: 'font' },
+                { url: "https://fonts.gstatic.com/s/orbitron/v31/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nysimBoWgz.woff2", type: 'font' },
+                { url: "https://prakket.pyscriptapps.com/real-project-copy/latest/quesno.html", type: 'html' }
+            ];
+
+            totalResources = resources.length;
+
+            for (const resource of resources) {
+                if (resource.type === 'css') {
+                    await trackLinkResource(resource.url);
+                } else if (resource.type === 'js') {
+                    await trackScriptResource(resource.url);
+                } else if (resource.type === 'font') {
+                    await trackFontResource(resource.url);
+                } else if (resource.type === 'html') {
+                    await trackHtmlResource(resource.url);
+                }
+            }
+            window.location.href = mainPageUrl;
+        }
+
+        // Track HTML resource loading
+        function trackHtmlResource(url) {
+            return new Promise((resolve) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        loadedResources++;
+                        displayResourceProgress(loadedResources, totalResources);
+                        resolve();
+                    } else {
+                        failedResources++;
+                        displayResourceProgress(loadedResources, totalResources);
+                        resolve();
+                    }
+                };
+                xhr.onerror = () => {
+                    failedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                xhr.send();
+            });
+        }
+
+        // Track font resource loading
+        function trackFontResource(url) {
+            return new Promise((resolve) => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'font';
+                link.href = url;
+                link.onload = () => {
+                    loadedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                link.onerror = () => {
+                    failedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                document.head.appendChild(link);
+            });
+        }
+
+        // Track CSS resource loading
+        function trackLinkResource(url) {
+            return new Promise((resolve) => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = url;
+                link.onload = () => {
+                    loadedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                link.onerror = () => {
+                    failedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                document.head.appendChild(link);
+            });
+        }
+
+        // Track JS resource loading
+        function trackScriptResource(url) {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = url;
+                script.onload = () => {
+                    loadedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                script.onerror = () => {
+                    failedResources++;
+                    displayResourceProgress(loadedResources, totalResources);
+                    resolve();
+                };
+                document.body.appendChild(script);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', loadMainPage);
+    </script>
+</body>
+</html>

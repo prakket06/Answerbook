@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answerbook</title>
+    <link rel="icon" type="image/x-icon" href = "icon.png">
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@600&family=Itim&family=Kode+Mono:wght@700&family=Orbitron:wght@900&family=Glass+Antiqua&family=Reenie+Beanie&family=Nabla&family=Tilt+Neon&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body background = "answerSheetBackground.jpg">
+    
+    <center>
+    <header>
+        <h1>
+            <button id="save" name = "save" class = "b">Save</button>
+            <button id="clear" name = "clear" class = "b">Clear</button>
+            BEST OF LUCK !
+        </h1>
+    </header>
+    <br>
+    <div id="userInputFields"></div>
+
+    <div class="drawing-controls">
+        <button id = "pen" name = "pen" class = "b">Pen 🖋️</button>
+        <button id = "eraser" name = "eraser" class = "b">Eraser</button>
+    </div>
+
+    <div class="pen-settings-container">
+        <div class="pen-setting-group">
+            <label id = "pencolour">Pen Colour</label>
+            <input type = "color" id = "penColour" name = "penColour" value = "#ffffff">
+        </div>
+        <div class="pen-setting-group">
+            <label id = "pensize">Pen Size</label>
+            <input type = "number" id = "penSize" name = "penSize" value = 3 class = "pensize">
+        </div>
+        <div class="pen-setting-group">
+            <label id = "grid">Grid</label>
+            <input type = "checkbox" id = "Grid" name = "Grid" class = "Grid">
+        </div>
+    </div>
+    
+    <img style = "pointer-events: none" id="penIcon"  width = 45 height = 45 src="pen.png" alt="Pen Icon" class="active"> 
+    <img style = "pointer-events: none" id="eraserIcon" src="eraser.png" alt="Eraser Icon" class="inactive">
+    <p id = "timer"></p>
+    <button id = "start">Start</button>
+    <button id = "stop">Stop</button>
+    <footer>
+        <h1>BYE BYE !</h1>
+        <i><b><a href="help.html">Help</a></b></i>
+    </footer>
+    </center>
+    <script src = "main.js"></script>
+</body>
+</html>

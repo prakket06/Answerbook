@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answerbook</title>
+    <link rel="icon" type="image/x-icon" href = "icon.png">
+    <style>
+        a:link{
+            color: #187b0a;
+        }
+        a:visited{
+            color: #676767;
+        }
+        a:hover{
+            color: #ff152a;
+        }
+        a:active{
+            color: #ff7e15;
+        }
+        img{
+            width: 50vw;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        th, td{
+            text-align: center;
+        }
+        th{
+            color: #ffffff;
+            background-color: #ff4055;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Table Of Contents</h1>
+        <table>
+            <tr>
+                <th>S.No.</th>
+                <th>Contents</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td><a href = "#overview">Overview</a></td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td><a href = "#quesno">Ques. No. Page</a></td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td><a href = "#answersheetPage">Answersheet Page</a></td>
+            </tr>
+            <tr>
+                <td>4.</td>
+                <td><a href = "#answersheetTextarea">Answersheet Textarea</a></td>
+            </tr>
+            <tr>
+                <td>5.</td>
+                <td><a href = "#answersheetBoard">Answersheet Board</a></td>
+            </tr>
+        </table>
+    </center>
+    <h1 id = "overview"><b>1. <u>Overview</u></b></h1>
+    <p>This is a webpage to solve questions online without the need of a notebook or pen, you can enter the number of questions you want to solve type those questions in textarea provided for questions and answers in textarea for answers. There is also a board provided to draw figures and do rough work, with a stopwatch to see how long it takes you to solve particular number of questions with a save option to save your questions and answers to solve or check later.
+    <center>
+        <img src = "QuesNoScreenShot.jpg" alt = "Ques. No. Page Screenshot"><p>Ques. No. Page</p>
+        <br>
+        <img src = "AnswerSheetScreenShot.jpg" alt = "Answersheet Page Screenshot"><p>Answersheet Page</p>
+    </center>
+    </p>
+    <h1 id = "quesno"><b>2. <u>Ques. No. Page</u></b></h1>
+    <p>This is used to take input of how many questions you want to solve, after submitting your input you would be redirected to answersheet page which would have that number of textareas and boards to work. Once you save questions in answersheet you will not be able to change the number of questions here afterwards.</p>
+    <h1 id = "answersheetPage"><b>3. <u>Answersheet Page</u></b></h1>
+    <p>The answersheet page contains 10 buttons Save & Clear (to save or clear questions from local storage), Start & Stop (for stopwatch), Pen & Eraser (for board), Straight Line, Dotted Line, Free Draw & Draw Circle (to make drawings using respective modes), one input to change colour of pen on board, one for size of pen and one checkbox to draw and erase grid on board. Two textareas & a board for each question to write question and answer in textareas and figures and rough work on board.</p>
+    <h1 id = "answersheetTextarea"><b>4. <u>Answersheet Textarea</u></b></h1>
+    <p>The textareas for writing questions and answers are auto resizable according to length of text and produce a typing sound on typing.</p>
+    <h1 id = "answersheetBoard"><b>5. <u>Answersheet Board</u></b></h1>
+    <p>The board has four modes straight line, dotted line, free draw and circle with variable colours and pen sizes. To draw the circle you will get popup to input the circle's x-coordinate, y-coordinate, radius, start angle & end angle on a slider. You can use grid to find iut the x & y coordinates of pixel where you want to put center of the circle. The circle is drawn anti-clockwise with angles 0° at 3'o clock moving clockwise as shown below.
+    <center>
+        <img src = "arc.gif" alt = "Arc Image with Angles"><p>Angles of circle.</p>
+    </center>
+    For e.g. to draw a circle only in Ist quadrant give start angle = 0° and end angle = 270°.
+    </p>
+</body>
+</html>
