@@ -95,6 +95,7 @@ for (let i = 1; i <= num; i++) {
 	freeLine.textContent = "Free Draw ✍️";                     // Set button text
 	container.appendChild(freeLine);                          // Append the button to the container
 	freeLine.addEventListener("click", drawingState);           // Add click event listener for drawing state
+    freeLine.style.backgroundColor = "rgba(0, 0, 0, 0.1)"; // Set active background color for free draw button
 						 
 	const circle = document.createElement("button");            // Circle button creation
 	circle.id = "Circle" + i;                                // Unique ID for each button
@@ -120,7 +121,7 @@ for (let i = 1; i <= num; i++) {
 function movePenEraser(e){
     const canvas = e.target;                            // Get the canvas element from the event target
     const canvasRect = canvas.getBoundingClientRect();      // Get the bounding rectangle of the canvas to calculate positions
-
+    //eraserIcon.style.border = 1 + "px solid " + "white"; // Set the border color of the pen icon to the current color
     // Check if the event is a touch event or mouse event
     if (e.changedTouches && e.changedTouches.length > 0) {
         // For touch events.
@@ -132,11 +133,11 @@ function movePenEraser(e){
         X2 = e.clientX - canvasRect.left;                       // Calculate X coordinate relative to the canvas
         Y2 = e.clientY - canvasRect.top + canvas.scrollTop;       // Calculate Y coordinate relative to the canvas
     }
-            
-    penIcon.style.left = X2 + (screen.width - canvas.width)/2 - (canvas.width * 0.02567125) + "px";      // X-Coordinate the pen icon based on the calculated X coordinate
-    penIcon.style.top = Y2 + canvasRect.top - (canvas.height * 0.04759375) + "px";                       // Y-Coordinate the pen icon based on the calculated Y coordinate
-    eraserIcon.style.left = X2 + (screen.width - canvas.width)/2 - (canvas.width * 0.035109375) + "px";   // X-Coordinate the eraser icon based on the calculated X coordinate
-    eraserIcon.style.top = Y2 + canvasRect.top - (canvas.height * 0.0390625) + "px";                    // Y-Coordinate the eraser icon based on the calculated Y coordinate
+    console.log((canvas.height * 0.0390625)/eraserIcon.height); // Log the width ratio for debugging
+    penIcon.style.left = X2 + (screen.width - canvas.width)/2 - (penIcon.width)/2.1 + "px";      // X-Coordinate the pen icon based on the calculated X coordinate
+    penIcon.style.top = Y2 + canvasRect.top - penIcon.height * 0.1 + "px";                       // Y-Coordinate the pen icon based on the calculated Y coordinate
+    eraserIcon.style.left = X2 + (screen.width - canvas.width)/2 - (eraserIcon.width)/1.7 + "px";   // X-Coordinate the eraser icon based on the calculated X coordinate
+    eraserIcon.style.top = Y2 + canvasRect.top - 0.2 * eraserIcon.height + "px";                    // Y-Coordinate the eraser icon based on the calculated Y coordinate
 }
 
 // Function to update the line color based on the selected color from the color picker.
