@@ -6,7 +6,7 @@ html {
 /* Body background styling */
 body {
     background-size: 100vw;
-    background-repeat: repeat-y;
+    background-repeat: repeat-y repeat-x;
 }
 
 /* Input styling for all input fields */
@@ -369,6 +369,10 @@ a:active {
     #start {
         position: fixed;
         right: 7.5vw;
+        margin: 0;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        z-index: 1000;
     }
 
     /* Drawing controls container for pen/eraser buttons */

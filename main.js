@@ -59,8 +59,8 @@ for (let i = 1; i <= num; i++) {
     const canvas = document.createElement("canvas");                    // Canvas creation
     canvas.id = "Canvas" + i;                                        // Unique ID for each canvas
     container.appendChild(canvas);                                    // Append the canvas to the container
-    canvas.width = screen.width / 2;                               // Set canvas width to half of the screen width
-    canvas.height = canvas.width / 2;                               // Set canvas height to half of the width
+    canvas.width = screen.width * 0.9;                               // Set canvas width to half of the screen width
+    canvas.height = screen.height * 0.4;                               // Set canvas height to half of the width
     canvasHistory[i] = [];                                        // Initialize history for this canvas
     canvas.addEventListener("touchstart", freeDrawStart);           // Add touchstart event listener for drawing
     canvas.addEventListener("touchmove", movePenEraser);              // Add touchmove event listener for moving pen/eraser icon
