@@ -348,6 +348,10 @@ a:active {
         z-index: 1;
     }
 
+    canvas {
+        width: 60vw;
+        height: 40vh;
+    }
     #save {
         position: fixed;
         top: 1vh;
@@ -452,11 +456,5 @@ a:active {
     /* Main heading font size for portrait */
     h1 {
         font-size: 2.5rem;
-    }
-
-    /* Adjust textarea/canvas container for portrait */
-    #textAreaContainer {
-        width: 98vw;
-        padding-top: 20vh;
     }
 }
