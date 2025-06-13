@@ -59,8 +59,7 @@ for (let i = 1; i <= num; i++) {
     const canvas = document.createElement("canvas");                    // Canvas creation
     canvas.id = "Canvas" + i;                                        // Unique ID for each canvas
     container.appendChild(canvas);                                    // Append the canvas to the container
-    canvas.width = screen.width * 0.9;                               // Set canvas width to half of the screen width
-    canvas.height = screen.height * 0.4;                               // Set canvas height to half of the width
+    setCanvasSize(canvas);                                           // Set the size of the canvas based on screen orientation
     canvasHistory[i] = [];                                        // Initialize history for this canvas
     canvas.addEventListener("touchstart", freeDrawStart);           // Add touchstart event listener for drawing
     canvas.addEventListener("touchmove", movePenEraser);              // Add touchmove event listener for moving pen/eraser icon
@@ -117,27 +116,35 @@ for (let i = 1; i <= num; i++) {
     container.appendChild(document.createElement("br"))
 }
 
-// Function to move the pen and eraser icons based on touch or mouse events.
-function movePenEraser(e){
-    const canvas = e.target;                            // Get the canvas element from the event target
-    const canvasRect = canvas.getBoundingClientRect();      // Get the bounding rectangle of the canvas to calculate positions
-    //eraserIcon.style.border = 1 + "px solid " + "white"; // Set the border color of the pen icon to the current color
-    // Check if the event is a touch event or mouse event
-    if (e.changedTouches && e.changedTouches.length > 0) {
-        // For touch events.
-        const touch = e.changedTouches[0];                      // Get the first touch point
-        X2 = touch.clientX - canvasRect.left;                    // Calculate X coordinate relative to the canvas
-        Y2 = touch.clientY - canvasRect.top + canvas.scrollTop;    // Calculate Y coordinate relative to the canvas
+function setCanvasSize(canvas) {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        canvas.width = window.innerWidth * 0.6; // 60vw
+        canvas.height = window.innerHeight * 0.4; // adjust as needed
     } else {
-        // For mouse events.
-        X2 = e.clientX - canvasRect.left;                       // Calculate X coordinate relative to the canvas
-        Y2 = e.clientY - canvasRect.top + canvas.scrollTop;       // Calculate Y coordinate relative to the canvas
+        canvas.width = screen.width * 0.9; // 90vw
+        canvas.height = screen.height * 0.4; // adjust as needed
     }
-    console.log((canvas.height * 0.0390625)/eraserIcon.height); // Log the width ratio for debugging
-    penIcon.style.left = X2 + (screen.width - canvas.width)/2 - (penIcon.width)/2.1 + "px";      // X-Coordinate the pen icon based on the calculated X coordinate
-    penIcon.style.top = Y2 + canvasRect.top - penIcon.height * 0.1 + "px";                       // Y-Coordinate the pen icon based on the calculated Y coordinate
-    eraserIcon.style.left = X2 + (screen.width - canvas.width)/2 - (eraserIcon.width)/1.7 + "px";   // X-Coordinate the eraser icon based on the calculated X coordinate
-    eraserIcon.style.top = Y2 + canvasRect.top - 0.2 * eraserIcon.height + "px";                    // Y-Coordinate the eraser icon based on the calculated Y coordinate
+}
+
+// Function to move the pen and eraser icons based on touch or mouse events.
+function movePenEraser(e) {
+    const canvas = e.target;
+    const canvasRect = canvas.getBoundingClientRect();
+
+    let clientX, clientY;
+    if (e.changedTouches && e.changedTouches.length > 0) {
+        const touch = e.changedTouches[0];
+        clientX = touch.clientX;
+        clientY = touch.clientY;
+    } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+    }
+
+    penIcon.style.left = clientX - penIcon.offsetWidth/12 + "px";
+    penIcon.style.top = clientY + "px";
+    eraserIcon.style.left = clientX - eraserIcon.offsetWidth/10+ "px";
+    eraserIcon.style.top = clientY - eraserIcon.offsetHeight/5 + "px";
 }
 
 // Function to update the line color based on the selected color from the color picker.
@@ -652,7 +659,14 @@ function clearCanvas(e) {
     // No need to call redrawCanvas here as history is cleared for this canvas
     // but for other canvases, the grid event listener will handle it.
 }
-        
+
+window.addEventListener('resize', () => {
+    document.querySelectorAll('canvas').forEach(setCanvasSize);
+});
+window.addEventListener('orientationchange', () => {
+    document.querySelectorAll('canvas').forEach(setCanvasSize);
+});
+
 // Update pen color when color picker changes
 penColour.addEventListener("input", (e) => {
     if(currentMode === "pen"){

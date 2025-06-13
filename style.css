@@ -349,8 +349,7 @@ a:active {
     }
 
     canvas {
-        width: 60vw;
-        height: 40vh;
+        max-width: 90vw;
     }
     #save {
         position: fixed;
