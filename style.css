@@ -35,7 +35,7 @@ button {
     border-color: #ba55ff;
     border-width: 0.2rem;
     margin: 0.1rem;
-    padding: 0.4rem 0.6rem;
+    padding: 0.3rem;
     cursor: pointer;
     font-size: 0.9rem;
 }
@@ -340,6 +340,9 @@ a:active {
 /* Responsive styles for portrait orientation */
 @media (orientation: portrait) {
 
+    html, body, * {
+        box-sizing: border-box;
+    }
     /* Header button styling for portrait */
     header h1 {
         padding: 0.5rem;
@@ -357,7 +360,7 @@ a:active {
         left: 1vw;
         margin: 0;
         font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
+        padding: 0.3rem;
         z-index: 1000;
     }
     #clear {
@@ -366,7 +369,7 @@ a:active {
         left: 15vw;
         margin: 0;
         font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
+        padding: 0.3rem;
         z-index: 1000;
     }
     #start {
@@ -374,7 +377,7 @@ a:active {
         right: 13vw;
         margin: 0;
         font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
+        padding: 0.3rem;
         z-index: 1000;
     }
 
@@ -383,7 +386,7 @@ a:active {
         right: 2vw;
         margin: 0;
         font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
+        padding: 0.3rem;
         z-index: 1000;
     }
     /* Drawing controls container for pen/eraser buttons */
@@ -404,7 +407,7 @@ a:active {
         position: static;
         margin: 0.5rem 1vw;
         font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
+        padding: 0.3rem;
         left: auto; top: auto; right: auto; transform: none;
     }
 
@@ -463,5 +466,9 @@ a:active {
     /* Main heading font size for portrait */
     h1 {
         font-size: 2.5rem;
+    }
+    #timer {
+        top: 5vh;
+        font-size: 2rem;
     }
 }
