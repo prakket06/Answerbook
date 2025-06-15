@@ -117,6 +117,7 @@ for (let i = 1; i <= num; i++) {
 }
 
 function setCanvasSize(canvas) {
+    redrawCanvas(canvas); // Call the function to set the canvas size based on screen orientation
     if (window.matchMedia("(orientation: portrait)").matches) {
         canvas.width = window.innerWidth * 0.6; // 60vw
         canvas.height = window.innerHeight * 0.4; // adjust as needed
@@ -520,8 +521,8 @@ async function drawCircle(e){
             return; // If user denies, exit the function
         }
         return result; // Return the result for further processing
-    });
 
+    });
     // Prompt user for Y coordinate of circle center
     const {value: circleY} = await Swal.fire({
         title: "Y-Coordinate Of Circle's Centre →",
@@ -682,6 +683,7 @@ penSize.addEventListener("input", (e) => {
             const ctx = canvas.getContext('2d');
             ctx.lineWidth = penSize.value;                             // Update line width
         }
+                             // Update the displayed pen size value
     }
 });
 

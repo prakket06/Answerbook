@@ -166,13 +166,11 @@ p {
 }
 #penSize {
     position: fixed;
-    top: 24vh;
-    right: 11.5vw;
+    top: 24.5vh;
+    right: 13.5vw;
     margin-right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 3rem;
 }
-
 /* Pen color and size label positioning */
 #pencolour {
     position: fixed;
@@ -189,14 +187,15 @@ p {
 #grid {
     position: fixed;
     top: 25vh;
-    right: 8vw;
+    right: 11vw;
 }
 #Grid {
     position: fixed;
     top: 24.25vh;
-    right: 5.5vw;
+    right: 8.5vw;
     width: 1.5rem;
     height: 1.5rem;
+    cursor: crosshair;
 }
 
 /* Header and footer styling */
@@ -267,7 +266,7 @@ h1 {
 
 /* SweetAlert2 popup styling for circle and angle popups */
 .circle-x {
-    background-color: #9a40ff !important;
+    background-color: rgba(154, 64, 255, 0.608) !important;
     color: white;
     font-family: "Glass Antiqua", cursive;
     font-weight: 400;
@@ -275,7 +274,7 @@ h1 {
     font-size: 1.25rem;
 }
 .circle-y {
-    background-color: #4063ff !important;
+    background-color: rgba(64, 99, 255, 0.608) !important;
     color: white;
     font-family: "Glass Antiqua", cursive;
     font-weight: 400;
@@ -283,7 +282,7 @@ h1 {
     font-size: 1.25rem;
 }
 .radius {
-    background-color: #00ff039b !important;
+    background-color: rgba(0, 255, 3, 0.608) !important;
     color: white;
     font-family: "Glass Antiqua", cursive;
     font-weight: 400;
@@ -291,7 +290,7 @@ h1 {
     font-size: 1.25rem;
 }
 .start-angle {
-    background-color: #ff742b !important;
+    background-color: rgba(255, 116, 43, 0.608) !important;
     color: white;
     font-family: "Glass Antiqua", cursive;
     font-weight: 400;
@@ -299,7 +298,7 @@ h1 {
     font-size: 1.25rem;
 }
 .end-angle {
-    background-color: #ff152a !important;
+    background-color: rgba(255, 21, 42, 0.608) !important;
     color: white;
     font-family: "Glass Antiqua", cursive;
     font-weight: 400;
@@ -314,7 +313,7 @@ h1 {
     background-color: transparent !important;
     width: 100%;
     height: 8px;
-    margin: 10px 0;
+    margin-bottom: 2rem;
 }
 
 /* Bin icon styling for clear popup */
@@ -326,6 +325,7 @@ h1 {
 /* Link styling for all states */
 a:link {
     color: white;
+    cursor: help
 }
 a:visited {
     color: #676767;
@@ -339,7 +339,9 @@ a:active {
 
 /* Responsive styles for portrait orientation */
 @media (orientation: portrait) {
-
+    .swal2-range.my-radius-range-input {
+        margin-bottom: 2rem;
+    }
     html, body, * {
         box-sizing: border-box;
     }
@@ -449,7 +451,11 @@ a:active {
         width: 3rem;
         height: 3rem;
     }
-    #penSize, #Grid {
+    #penSize {
+        width: 3rem;
+        height: 1.5rem;
+    }
+    #Grid {
         width: 1.5rem;
         height: 1.5rem;
     }
