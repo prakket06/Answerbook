@@ -683,10 +683,14 @@ penSize.addEventListener("input", (e) => {
             const ctx = canvas.getContext('2d');
             ctx.lineWidth = penSize.value;                             // Update line width
         }
-                             // Update the displayed pen size value
     }
 });
 
+penSize.addEventListener("blur", (e) => {
+    if (e.target.tagName.toLowerCase() === "input") {
+        document.querySelectorAll('canvas').forEach(redrawCanvas); // Redraw all canvases to apply the new pen size
+    }
+});
 // Switch to pen mode when pen icon is clicked
 pen.addEventListener("click", (e) => {
     penIcon.classList.add('active');
